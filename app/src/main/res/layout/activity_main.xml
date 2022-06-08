@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reg mode :Registration"
+        android:id="@+id/mode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fp_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mode" />
+
+    <EditText
+        android:id="@+id/data1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:focusable="false"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:drawableLeft="@drawable/ic_baseline_snippet_folder_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/data2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text=" "
+        android:maxLines="1"
+        android:singleLine="true"
+        android:drawableLeft="@drawable/ic_baseline_snippet_folder_24"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data1" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match Images"
+        app:layout_constraintTop_toBottomOf="@id/data2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/match_image"/>
+
+   <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match WSQ"
+        app:layout_constraintTop_toBottomOf="@id/data2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/match_wsq"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match ISOs"
+        app:layout_constraintTop_toBottomOf="@id/match_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/match_iso"/>
+
+  <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Match WSQ ISO"
+        app:layout_constraintTop_toBottomOf="@id/match_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/match_wsq_iso"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
