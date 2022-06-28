@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 import sparta.realm.Activities.SpartaAppCompactFingerPrintActivity;
 import sparta.realm.Realm;
@@ -62,7 +63,10 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
         rm = findViewById(R.id.mode);
         data_source1 = findViewById(R.id.data1);
         data_source2 = findViewById(R.id.data2);
+BTV2 fph=new BTV2(this);
+//fph.start_auto();
 
+svars.set_use_bt_device(act,false);
 
         data_source1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +107,7 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
             public void onClick(View v) {
 //                reg_mode=!reg_mode;
                 rm.setText(reg_mode ? "Registering" : "Verifying ...");
+                fph.capture();
 //                matchWsq("");
 //                rm.setText( "Matching wsq ...");
 //                match_wsq(data_source1.getText().toString(),data_source2.getText().toString());
@@ -150,10 +155,22 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
             }
         });
     }
+boolean resumed=false;
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if(resumed)
+//        {
+//            fph_bt.start();
+//        }else {
+//            resumed=true;
+//        }
+
+    }
 
     public String ImageToIso(Bitmap bmp) {
         byte[] wsq = new WSQEncoder(bmp).encode();
-        Log.e("Converted wsq1", "" + wsqData.length);
+//        Log.e("Converted wsq1", "" + wsqData.length);
         CompressionImpl cmp = new CompressionImpl();
         try {
             cmp.Start();
@@ -362,9 +379,9 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
                     ContentValues cv = new ContentValues();
                     cv.put("data", capt_result);
                     cv.put("data_index", "" + 1);
-                    cv.put("transaction_no", svars.device_specific_transaction_no(Realm.context));
+                    cv.put("transaction_no", getTransactionNo());
                     cv.put("data_type", "" + svars.data_type_indexes.fingerprints);
-                    cv.put("sid", "" + svars.device_specific_transaction_no(Realm.context));
+//                    cv.put("sid", "" + getTransactionNo());
 
                     cv.put("sync_status", "p");
                     cv.put("user_id", svars.user_id(act));
@@ -390,7 +407,10 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
             }).start();
         }
     }
+    public static String getTransactionNo() {
+        return System.currentTimeMillis()+"::"+new Random().nextDouble()+"::"+new Random().nextDouble();
 
+    }
 
     @Override
     public void on_result_image_obtained(Bitmap capt_result_img) {
@@ -399,6 +419,7 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    ((ImageView) findViewById(R.id.fp_img)).setImageBitmap(capt_result_img);
                     Toast.makeText(Realm.context, "Saved Image: " + save_fp(capt_result_img), Toast.LENGTH_LONG).show();
                     Log.e("IMG", "" + capt_result_img.getWidth() + " X " + capt_result_img.getHeight());
                 }
@@ -411,7 +432,7 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
     public void on_result_wsq_obtained(byte[] wsq) {
         super.on_result_wsq_obtained(wsq);
         String wsq_name = save_wsq(wsq);
-        matchWsq(wsq_name);
+//        matchWsq(wsq_name);
         if (reg_mode) {
             runOnUiThread(new Runnable() {
                 @Override

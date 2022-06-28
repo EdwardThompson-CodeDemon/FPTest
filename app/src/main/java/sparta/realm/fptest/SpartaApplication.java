@@ -19,6 +19,7 @@ import sparta.realm.Realm;
 import sparta.realm.Services.DatabaseManager;
 import sparta.realm.fptest.RealmDynamics.spartaDynamics;
 import sparta.realm.spartautils.svars;
+import sparta.realm.utils.AppConfig;
 
 
 public class SpartaApplication extends Application {
@@ -30,15 +31,15 @@ public class SpartaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appContext = getApplicationContext();
-        svars.SPARTA_APP UIPA_APP = new svars.SPARTA_APP("http://ta.cs4africa.com:9090",
+        AppConfig UIPA_APP = new AppConfig("http://ta.cs4africa.com:9090",
                 /*"http://ta.cs4africa.com:2222/api/AppStore/LoadApp"*/null,
                 "U.I.P.A." ,
                 "MAIN CAMPUS",
                 "/Authentication/Login/Submit",false
 
         );
-        UIPA_APP.WORKING_PROFILE_MODE= svars.SPARTA_APP.PROFILE_MODE.GENERAL;
-svars.DB_NAME="fp_dt_test";
+
+        svars.DB_NAME="fp_dt_test";
 svars.DB_PASS="764512";
 
 
