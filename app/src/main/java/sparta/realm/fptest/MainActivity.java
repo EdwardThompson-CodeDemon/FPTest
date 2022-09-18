@@ -43,6 +43,7 @@ import sparta.realm.Services.DatabaseManager;
 import sparta.realm.fptest.Storage.StorageManager;
 import sparta.realm.spartautils.biometrics.DataMatcher;
 import sparta.realm.spartautils.biometrics.fp.Globals;
+import sparta.realm.spartautils.biometrics.fp.T801;
 import sparta.realm.spartautils.bluetooth.bt_probe;
 import sparta.realm.spartautils.matching_interface;
 import sparta.realm.spartautils.svars;
@@ -54,18 +55,18 @@ public class MainActivity extends SpartaAppCompactFingerPrintActivity implements
     boolean reg_mode = true;
     EditText data_source1, data_source2;
     Button rm;
-
+//    BTV2 fph;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        svars.set_current_device(Realm.context, svars.DEVICE.UAREU.ordinal());
+        svars.set_current_device(Realm.context, svars.DEVICE.GENERAL.ordinal());
         rm = findViewById(R.id.mode);
         data_source1 = findViewById(R.id.data1);
         data_source2 = findViewById(R.id.data2);
-BTV2 fph=new BTV2(this);
-//fph.start_auto();
 
+//        startFPModule(new BTV2(this));
+        startFPModule(new T801(this));
 svars.set_use_bt_device(act,false);
 
         data_source1.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +108,8 @@ svars.set_use_bt_device(act,false);
             public void onClick(View v) {
 //                reg_mode=!reg_mode;
                 rm.setText(reg_mode ? "Registering" : "Verifying ...");
-                fph.capture();
+                fingerprintManger.capture();
+
 //                matchWsq("");
 //                rm.setText( "Matching wsq ...");
 //                match_wsq(data_source1.getText().toString(),data_source2.getText().toString());
@@ -159,6 +161,10 @@ boolean resumed=false;
     @Override
     protected void onResume() {
         super.onResume();
+//        fph_wall_mounted.display_image=true;
+
+//        fph=new BTV2(this);
+
 //        if(resumed)
 //        {
 //            fph_bt.start();

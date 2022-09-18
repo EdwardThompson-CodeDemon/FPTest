@@ -43,7 +43,7 @@ dependencies {
 //    implementation 'com.github.EdwardThompson-CodeDemon.systemRealm:Annotations:0.0.39'
 
 
-    implementation 'com.github.EdwardThompson-CodeDemon:Realm:1.0.158'
+    implementation 'com.github.EdwardThompson-CodeDemon:Realm:1.0.164'
     annotationProcessor 'com.github.EdwardThompson-CodeDemon.SystemRealm:AnnotationProcessor:0.0.50'
     implementation 'com.github.EdwardThompson-CodeDemon.SystemRealm:Annotations:0.0.50'
 
